@@ -1,0 +1,18 @@
+{% load static %}
+
+<ul class="menu">
+    {% for item in menu.children %}
+        {% if item.children %}
+            <li class="{% if item.is_active %}active{% endif %} {% if item.is_expanded %}expanded{% endif %}">
+                <a href="{{ item.url }}">{{ item.title }}</a>
+                {% if item.is_expanded %}
+                    {% include 'menu.html' with menu=item %}
+                {% endif %}
+            </li>
+        {% else %}
+            <li class="{% if item.is_active %}active{% endif %}">
+                <a href="{{ item.url }}">{{ item.title }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
